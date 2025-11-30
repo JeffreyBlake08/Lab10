@@ -1,11 +1,11 @@
 function calculateSumAndMean() {
   let howMany = parseInt(prompt("Enter amount:"), 10);
-  if (isNaN(howMany) || howMany <= 0) return;
+  if (isNaN(howMany) || howMany <= 0 || howMany > 20) return;
 
   const numbers = [];
 
   for (let i = 0; i < howMany; i++) {
-    let value = Number(prompt(""));
+    let value = Number(prompt("Enter number:"));
     if (isNaN(value)) value = 0;
     numbers[i] = value;
   }
@@ -23,3 +23,4 @@ function calculateSumAndMean() {
     <p>${mean}</p>
   `;
 }
+
