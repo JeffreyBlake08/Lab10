@@ -1,13 +1,24 @@
-function calculateSumAndMean() {
-  let howMany = parseInt(prompt("Enter amount:"), 10);
-  if (isNaN(howMany) || howMany <= 0 || howMany > 20) return;
+function createInputs() {
+  const howMany = parseInt(document.getElementById("howMany").value);
+  if (!howMany || howMany < 1 || howMany > 10) return;
 
+  const container = document.getElementById("inputs");
+  container.innerHTML = "";
+
+  for (let i = 0; i < howMany; i++) {
+    container.innerHTML += `<input type="number" id="num${i}"><br>`;
+  }
+
+  document.getElementById("submitBtn").style.display = "block";
+}
+
+function calculate() {
+  const howMany = parseInt(document.getElementById("howMany").value);
   const numbers = [];
 
   for (let i = 0; i < howMany; i++) {
-    let value = Number(prompt("Enter number:"));
-    if (isNaN(value)) value = 0;
-    numbers[i] = value;
+    let val = Number(document.getElementById("num" + i).value);
+    numbers.push(val);
   }
 
   let sum = 0;
@@ -17,10 +28,7 @@ function calculateSumAndMean() {
 
   const mean = sum / numbers.length;
 
-  document.getElementById("output").innerHTML = `
-    <p>${numbers.join(", ")}</p>
-    <p>${sum}</p>
-    <p>${mean}</p>
-  `;
+  document.getElementById("output").innerHTML =
+    numbers.join(", ") + "<br>" + sum + "<br>" + mean;
 }
 
