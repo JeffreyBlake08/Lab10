@@ -1,53 +1,62 @@
+// Create the number input boxes
 function createInputs() {
   const howMany = parseInt(document.getElementById("howMany").value);
 
-  // stop if nothing or invalid
+  // Check that user entered a positive number
   if (isNaN(howMany) || howMany < 1) {
+    alert("Please enter how many numbers you want (1 or more).");
     return;
   }
 
   const container = document.getElementById("inputs");
-  container.innerHTML = ""; // clear old inputs
+  container.innerHTML = ""; // clear old inputs, if any
 
-  // create one input per number
+  // Create one labelled input for each number
   for (let i = 0; i < howMany; i++) {
-    container.innerHTML +=
-      'Number ' + (i + 1) + ': <input type="number" id="num' + i + '"><br>';
+    const label = document.createElement("label");
+    label.textContent = "Number " + (i + 1) + ": ";
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.id = "num" + i;
+
+    container.appendChild(label);
+    container.appendChild(input);
+    container.appendChild(document.createElement("br"));
   }
 
-  // show submit button
+  // Show the submit button
   document.getElementById("submitBtn").style.display = "inline-block";
 
-  // clear old result
+  // Clear any previous result
   document.getElementById("output").innerHTML = "";
-}
-
+// Calculate sum and mean of the array
 function calculate() {
   const howMany = parseInt(document.getElementById("howMany").value);
   const numbers = [];
 
-  // read numbers from the inputs
+  // Read all the numbers from the inputs
   for (let i = 0; i < howMany; i++) {
     let val = Number(document.getElementById("num" + i).value);
     if (isNaN(val)) {
-      val = 0; // treat empty as 0
+      val = 0; // treat empty as 0, so the array still has that position
     }
     numbers.push(val);
   }
 
-  // sum
+  // Calculate sum
   let sum = 0;
   for (let i = 0; i < numbers.length; i++) {
     sum += numbers[i];
   }
 
-  // mean
+  // Calculate mean
   const mean = sum / numbers.length;
 
-  // show labelled output
+  // Output clearly labelled results
   document.getElementById("output").innerHTML =
-    '<p><strong>Numbers:</strong> ' + numbers.join(", ") + '</p>' +
-    '<p><strong>Sum:</strong> ' + sum + '</p>' +
-    '<p><strong>Mean:</strong> ' + mean + '</p>';
+    "<p><strong>Array (numbers):</strong> " + numbers.join(", ") + "</p>" +
+    "<p><strong>Sum of array:</strong> " + sum + "</p>" +
+    "<p><strong>Mean of array:</strong> " + mean + "</p>";
 }
 
